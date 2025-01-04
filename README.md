@@ -5,9 +5,10 @@
 ## 개발환경
 OS : Windows10  
 Tools : VSC, DBeaver, Docker, PostMan  
+FE : Vue.js  
+BE : Node.js
 DB : Postgresql(Docker)  
 Server : Express  
-Framework : NodeJS  
 
 ## 기능
 ### 일반 사용자 페이지
@@ -18,7 +19,7 @@ Framework : NodeJS
 - 게시판
   - CRUD 기능
   - 최대 표시 개수 기능
-  - 댓글, 대댓글 기능
+  - 댓글, 대댓글 기능``
     > 수정, 삭제 기능
   - 추천/비추천 기능
   - 첨부파일 기능
