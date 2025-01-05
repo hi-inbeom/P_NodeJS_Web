@@ -20,4 +20,3 @@ app.use( '/', express.static( frontPath ));
 app.get('/', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
-  

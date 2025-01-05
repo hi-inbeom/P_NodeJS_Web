@@ -4,18 +4,44 @@
             <img src="../../assets/logo.webp" alt="이미지">
             <div>나무</div>
         </div>
-        <div id="SearchBar">
+        <div id="SearchBarWapper">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
             <input type="text" placeholder="Search">
         </div>
-        <button>Sign Up</button>
+        <div class="LogButton" id="LoginButton" @click="openLoginModal" v-if="!isLogin">
+            Log In
+        </div>
+        <div class="LogButton" id="LogoutButton" v-else>
+            My Icon
+        </div>
+
+        <LoginModal :visible="modalVisible" @close="closeLoginModal"/>
     </header>
 </template>
-<script>
-export default{
-    
-}
 
+<script>
+    import LoginModal from '../account/Login.vue'
+
+    export default{
+        name: 'AppHeader',
+        data() {
+            return {
+                isLogin: false,
+                modalVisible: false
+            }
+        },
+        methods: {
+            openLoginModal() {
+                this.modalVisible = true;
+            },
+            closeLoginModal() {
+                this.modalVisible = false;
+            }
+        },
+        components: {
+            LoginModal: LoginModal
+        }
+    }
 </script>
 
 <style>
@@ -27,6 +53,9 @@ header {
     position: relative;
     border-bottom: 1px solid black;
     padding: 0 15px;
+}
+body {
+    margin: 0;
 }
 
 #LogoWrapper {
@@ -46,7 +75,7 @@ header {
     color: gray;
 }
 
-#SearchBar {
+#SearchBarWapper {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -58,10 +87,10 @@ header {
     border: 1px solid #ccc;
     border-radius: 20px;
 }
-#SearchBar {
+#SearchBarWapper {
     padding : 0 10px;
 }
-#SearchBar input {
+#SearchBarWapper input {
     flex: 1;
     height: 30px;
     padding: 5px 5px;
@@ -69,20 +98,16 @@ header {
     outline: none;
 }
 
-button {
+.LogButton {
     padding: 8px 16px;
     background-color: rgb(94,111,75);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
-button:hover {
+.LogButton:hover {
     background-color: rgb(74, 87, 59);
-}
-
-body {
-    margin: 0;
 }
 </style>
