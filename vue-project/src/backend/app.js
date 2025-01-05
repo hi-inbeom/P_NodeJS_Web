@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`NodeJS Start`);
 });
 
 // 정적 파일을 서빙하는 미들웨어
