@@ -1,5 +1,5 @@
 ## P_NodeJS_Web
-- 간단한 NodeJS 기반의 MVC 패턴 홈페이지 만들기 연습 프로젝트
+- Vue + NodeJS + Express를 사용하여 MVC 패턴의 간단한 홈페이지 만들기 연습 프로젝트
 - 기본 베이스 모델 홈페이지는 Reddit
 
 ## 개발환경
