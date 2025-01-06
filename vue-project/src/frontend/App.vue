@@ -1,5 +1,5 @@
 <template>
-  <AppHeader>asdasd</AppHeader>
+  <AppHeader></AppHeader>
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 

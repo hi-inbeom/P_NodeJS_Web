@@ -25,12 +25,12 @@
 
             <form action="">
                 <div class="login-input-box">
-                    <input id="username" type="text" name="username" placeholder="아이디">
+                    <input id="username" type="text" name="username" placeholder="아이디" autocomplete="off">
                     <label for="username">아이디</label>
                 </div>
 
                 <div class="login-input-box">
-                    <input id="password" type="password" name="password" placeholder="비밀번호">
+                    <input id="password" type="password" name="password" placeholder="비밀번호" autocomplete="off">
                     <label for="password">비밀번호</label>
                 </div>
                 <div class="help-box">
@@ -161,12 +161,11 @@
         margin:10px 0;
     }
     .login-input-box > input{
-        
         display:flex;
         background: rgb(218, 218, 218);
         border:none;
         border-radius: 15px;
-        padding:12px 3px 12px 12px;
+        padding:16px 3px 8px 12px;
         font-size:14pt;
         width:95%;
     }
