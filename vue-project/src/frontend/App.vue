@@ -1,16 +1,16 @@
 <template>
   <AppHeader></AppHeader>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <PostList></PostList> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import AppHeader from './components/common/AppHeader.vue'
+// import PostList from './components/post/PostList.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    // PostList,
     AppHeader
   }
 }

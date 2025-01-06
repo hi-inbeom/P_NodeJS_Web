@@ -16,7 +16,6 @@ app.listen(port, () => {
 // 서빙의 개념과 미들웨어의 개념이 없다.
 app.use( '/', express.static( frontPath ));  
 
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });

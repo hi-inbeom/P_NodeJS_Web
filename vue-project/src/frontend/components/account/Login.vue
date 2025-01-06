@@ -11,7 +11,8 @@
                 <a href="/">개인정보 수집 및 이용</a>
                 을 이해하고 동의하였음을 인정합니다.
             </p>
-            <div class="kind-login">
+            <!-- 챌린지 목표로 설정정 -->
+            <!-- <div class="kind-login">
                 <div class="login-wrapper">
                     <img src="../../assets/login-phone.png" alt="">
                     <div>Phone</div>
@@ -21,7 +22,7 @@
                     <div>Google</div>
                 </div>
             </div>
-            <div id="boundary">또는</div>
+            <div id="boundary">또는</div> -->
 
             <form action="">
                 <div class="login-input-box">
