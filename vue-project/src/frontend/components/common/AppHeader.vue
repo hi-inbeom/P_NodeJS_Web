@@ -14,28 +14,27 @@
         <div class="LogButton" id="LogoutButton" v-else>
             My Icon
         </div>
-
-        <LoginModal :visible="modalVisible" @close="closeLoginModal"/>
+        <LoginModal v-if="isLoginModalVisible" @close="closeLoginModal"/>
     </header>
 </template>
 
 <script>
-import LoginModal from '../account/Login.vue'
+import LoginModal from '../account/LoginModal.vue'
 
     export default{
         name: 'AppHeader',
         data() {
             return {
                 isLogin: false,
-                modalVisible: false
+                isLoginModalVisible: false
             }
         },
         methods: {
             openLoginModal() {
-                this.modalVisible = true;
+                this.isLoginModalVisible = true;
             },
             closeLoginModal() {
-                this.modalVisible = false;
+                this.isLoginModalVisible = false;
             }
         },
         components: {
