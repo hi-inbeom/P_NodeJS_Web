@@ -131,4 +131,10 @@ export default {
         font-size: 12pt;
         margin-top: 5px;
     }
+    .account-disable-btn{
+        background-color: #cccccc;
+        color: #888888;
+        border: 1px solid #cccccc;
+        cursor: not-allowed;
+    }
 </style>
