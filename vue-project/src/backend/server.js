@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-process.env.NODE_ENV = "development";
-
 // 환경 변수 로드
 require('dotenv').config({path:path.resolve(__dirname, 'config/.env')});
 
@@ -22,12 +20,15 @@ app.listen(port, () => {
     console.log(process.env.DB_NAME);
 });
 
-// Vue 빌드된 정적 파일을 기본 경로로 설정
+// 메인화면 설정
 app.use( '/', express.static( frontPath ));  
 app.get('/', (req, res) => {
+    const data = 1;
     res.sendFile(path.join(distPath, 'index.html'));
 });
 
 // Routers
-const accountRouter = require('../backend/routes/AccountRouter');
+const accountRouter = require('./routers/AccountRouter');
+const accountAuth = require('./routers/AccountAuth')
 app.use('/account',accountRouter);
+app.use('/auth',accountAuth);

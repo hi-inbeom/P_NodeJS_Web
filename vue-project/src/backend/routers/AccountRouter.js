@@ -3,7 +3,6 @@ const router = express.Router();
 
 const accountController = require('../controllers/account/AccountController');
 
-
 router.post('/create', (req, res) => {
     console.log('/account/create Work');
     try {

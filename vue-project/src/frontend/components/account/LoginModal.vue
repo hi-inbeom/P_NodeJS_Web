@@ -1,6 +1,6 @@
 <template>
-    <div class="modal-backdrop" @click.self="closeModal">
-      <div class="modal-content">
+    <div class="modal-backdrop">
+      <div class="modal-content" @click.stop>
         <button class="close-btn" @click.self="closeModal">X</button>
         <div class="content-area">
             <h1>Login</h1>
