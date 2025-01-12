@@ -3,15 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-process.env.NODE_ENV = "test"
+process.env.NODE_ENV = "development";
 
 // 환경 변수 로드
-require('dotenv').config({
-    path: process.env.NODE_ENV == 'test'
-    ? path.resolve(__dirname, 'config/.env.test')
-    : path.resolve(__dirname, 'config/.env')
-});
-console.log(process.env.DB_NAME);
+require('dotenv').config({path:path.resolve(__dirname, 'config/.env')});
 
 // Vue 정적 파일 경로 설정
 const frontPath = path.join(__dirname, '../frontend/dist');
@@ -21,12 +16,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
 app.listen(port, () => {
     console.log(`NodeJS Start`);
+    console.log(process.env.DB_NAME);
 });
-
-// // controllers
-// const accountController = require('./controllers/account/AccountController');
 
 // Vue 빌드된 정적 파일을 기본 경로로 설정
 app.use( '/', express.static( frontPath ));  
@@ -37,15 +31,3 @@ app.get('/', (req, res) => {
 // Routers
 const accountRouter = require('../backend/routes/AccountRouter');
 app.use('/account',accountRouter);
-
-// app.post('/account/create', (req, res) => {
-//     console.log('/account/create Work');
-//     try {
-//         accountController.createAccount(req);
-//         res.status(200).send({ message: 'Account created' });
-//     } catch(err) {
-//         res.status(500).json({message: err.message});
-//     }
-// });
-
-// app.post('/account/create', accountController.createAccount);
