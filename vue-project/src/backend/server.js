@@ -25,8 +25,8 @@ app.listen(port, () => {
     console.log(`NodeJS Start`);
 });
 
-// controllers
-const accountController = require('./controllers/account/AccountController');
+// // controllers
+// const accountController = require('./controllers/account/AccountController');
 
 // Vue 빌드된 정적 파일을 기본 경로로 설정
 app.use( '/', express.static( frontPath ));  
@@ -34,10 +34,18 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
 });
 
-app.post('/account/create', (req, res) => {
-    console.log("??????????????????????")
-    console.log('/account/create Work');
-    res.status(200).send({ message: 'Account created' }); // 클라이언트에 응답
-});
+// Routers
+const accountRouter = require('../backend/routes/AccountRouter');
+app.use('/account',accountRouter);
+
+// app.post('/account/create', (req, res) => {
+//     console.log('/account/create Work');
+//     try {
+//         accountController.createAccount(req);
+//         res.status(200).send({ message: 'Account created' });
+//     } catch(err) {
+//         res.status(500).json({message: err.message});
+//     }
+// });
 
 // app.post('/account/create', accountController.createAccount);

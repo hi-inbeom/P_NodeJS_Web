@@ -1,14 +1,17 @@
-const joinService = require('../../services/account/AccountService');
+const accountService = require('../../services/account/AccountService');
 
 class AccountController {
-    async createAccount(req, res) {
-        try {
-            const account = joinService.createAccount(req);
-            res.status(201).json(account);
-            res.status(200).json(account);
-        } catch(err) {
-            res.status(500).json({message: err.message});
-        }
+    async createAccount(req) {
+        const account = accountService.createAccount(req);
+    }
+    async readAccount(req) {
+        const account = accountService.readAccount(req);
+    }
+    async updateAccount(req) {
+        const account = accountService.updateAccount(req);
+    }
+    async deleteAccount(req) {
+        const account = accountService.deleteAccount(req);
     }
 }
 
