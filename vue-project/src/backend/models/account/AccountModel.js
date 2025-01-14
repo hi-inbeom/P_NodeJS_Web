@@ -1,59 +1,49 @@
 const psql = require('../../config/psql');
 
 class AccountModel {
-    async createAccount(userid, userpassword, userphone, useremail) {
+
+    async executeQuery(queryText, values) {
         const query = {
-            text: 'INSERT INTO account(userid, userpassword, userphone, useremail) VALUES($1, $2, $3, $4)',
-            values: [userid, userpassword, userphone, useremail],
+            text: queryText,
+            values: values,
         };
 
         try {
             const result = await psql.query(query);
             return result.rows[0];
         } catch (error) {
-            throw new Error('Error in creating account: ' + error.message);
+            throw new Error('Error executing query: ' + error.message);
         }
+    }
+
+    async createAccount(userid, userpassword, useremail) {
+        const queryText = 'INSERT INTO account(userid, userpassword, useremail) VALUES($1, $2, $3, $4)';
+        return this.executeQuery(queryText, [userid, userpassword, useremail]);
     }
 
     async readAccount(email) {
-        const query = {
-            text: 'SELECT * FROM account'
-        };
-
-        try {
-            const result = await psql.query(query);
-            return result.rows[0];
-        } catch (error) {
-            throw new Error('Error in fetching account: ' + error.message);
-        }
+        const queryText = 'SELECT * FROM account WHERE useremail = $1';
+        return this.executeQuery(queryText, [email]);
     }
 
     async updateAccount(email, newEmail, newPassword) {
-        const query = {
-            text: 'UPDATE account SET email = $1, password = $2 WHERE email = $3',
-            values: [newEmail, newPassword, email],
-        };
-
-        try {
-            const result = await psql.query(query);
-            return result.rows[0];
-        } catch (error) {
-            throw new Error('Error in updating account: ' + error.message);
-        }
+        const queryText = 'UPDATE account SET useremail = $1, userpassword = $2 WHERE useremail = $3';
+        return this.executeQuery(queryText, [newEmail, newPassword, email]);
     }
 
     async deleteAccount(email) {
-        const query = {
-            text: 'DELETE FROM account WHERE email = $1',
-            values: [email],
-        };
+        const queryText = 'DELETE FROM account WHERE useremail = $1';
+        return this.executeQuery(queryText, [email]);
+    }
 
-        try {
-            const result = await psql.query(query);
-            return result.rows[0];
-        } catch (error) {
-            throw new Error('Error in deleting account: ' + error.message);
-        }
+    async checkUserId(userid) {
+        const queryText = 'SELECT * FROM account WHERE userid = $1';
+        return this.executeQuery(queryText, [userid]);
+    }
+
+    async updatePassword(userid, newPassword) {
+        const queryText = 'UPDATE account SET userpassword = $1 WHERE userid = $2';
+        return this.executeQuery(queryText, [newPassword, userid]);
     }
 }
 

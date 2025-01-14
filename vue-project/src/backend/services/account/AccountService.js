@@ -1,54 +1,43 @@
 const accountModel = require('../../models/account/AccountModel');
 
 class AccountService {
-    async createAccount(req) {
-        const { userid, userpassword, userphone, useremail } = req.params;
+    async handleService(serviceMethod, ...args) {
         try {
-            const account = await accountModel.createAccount(userid, userpassword, userphone, useremail);
-            return account;
+            return await serviceMethod(...args);
         } catch (error) {
-            throw new Error('Error in AccountService createAccount: ' + error.message);
+            throw new Error(`Error in AccountService: ${error.message}`);
         }
+    }
+
+    async createAccount(req) {
+        const { userid, userpassword, useremail } = req.body;
+        return this.handleService(accountModel.createAccount, userid, userpassword, useremail);
     }
 
     async readAccount(req) {
-        let { email } = req.params;
-        try {
-            const account = await accountModel.readAccount(email);
-            if (!account) {
-                throw new Error('Account not found');
-            }
-            return account;
-        } catch (error) {
-            throw new Error('Error in AccountService getAccountByEmail: ' + error.message);
-        }
+        const { email } = req.body;
+        return this.handleService(accountModel.readAccount, email);
     }
 
     async updateAccount(req) {
-        const { userid } = req.params;
-        const { newUserPassword } = req.body;
-        try {
-            const updatedAccount = await accountModel.updateAccount(email, newEmail, newPassword);
-            if (!updatedAccount) {
-                throw new Error('Account not found or update failed');
-            }
-            return updatedAccount;
-        } catch (error) {
-            throw new Error('Error in AccountService updateAccount: ' + error.message);
-        }
+        const { email, newEmail, newPassword } = req.body;
+        return this.handleService(accountModel.updateAccount, email, newEmail, newPassword);
     }
 
     async deleteAccount(req) {
-        const { email } = req.params;
-        try {
-            const deletedAccount = await accountModel.deleteAccount(email);
-            if (!deletedAccount) {
-                throw new Error('Account not found or deletion failed');
-            }
-            return deletedAccount;
-        } catch (error) {
-            throw new Error('Error in AccountService deleteAccount: ' + error.message);
-        }
+        const { email } = req.body;
+        return this.handleService(accountModel.deleteAccount, email);
+    }
+
+    async checkUserId(req) {
+        const { userid } = req.body;
+        const isUserIdAvailable = await this.handleService(accountModel.checkUserId, userid);
+        return isUserIdAvailable ? "hello" : "none";
+    }
+
+    async updatePassword(req) {
+        const { updatePassword } = req.body;
+        return this.handleService(accountModel.updatePassword, updatePassword);
     }
 }
 

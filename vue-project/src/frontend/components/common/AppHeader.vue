@@ -48,9 +48,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    height: 60px;
+    height: 100%;
     position: relative;
-    border-bottom: 1px solid black;
     padding: 0 15px;
 }
 body {

@@ -29,6 +29,8 @@ app.get('/', (req, res) => {
 
 // Routers
 const accountRouter = require('./routers/AccountRouter');
-const accountAuth = require('./routers/AccountAuth')
+const accountAuth = require('./routers/AccountAuth');
+
+
 app.use('/account',accountRouter);
 app.use('/auth',accountAuth);

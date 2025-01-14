@@ -43,9 +43,10 @@
                     v-model="userid"
                     placeholder="아이디"
                     autocomplete="off"
-                    @blur="usedIdWarning">
+                    @blur="handleUsedIdWarning">
             <label for="email">아이디</label>
-            <span v-if="usedId" class="join-warning-text">사용 중인 계정입니다.</span>
+            <span v-if="usedIdWarning==1" class="join-warning-text">사용 중인 계정입니다.</span>
+            <span v-if="usedIdWarning==2" class="join-warning-text">사용 가능한 계정입니다.</span>
         </div>
         <!-- 입력값-비밀번호 -->
         <div class="join-input-box">
@@ -89,17 +90,20 @@ export default {
     data () {
         return {
             joinProcess: 0,
+
             usermail: '',
-            emailWarning: false,
+            verifyCode: "",
+            inputCode: "",
+
             userid: '',
-            usedId: false,
             userpassword: '',
             checkSamePassword: '',
+
+            emailWarning: false,
             userpasswordWarning: false,
             passwordWarning: false,
-            verifyCode: "",
             verifyWaring: false,
-            inputCode: ""
+            usedIdWarning: 0
         }
     },
     methods: {
@@ -119,9 +123,22 @@ export default {
                 this.verifyWaring = true;
             }
         },
-        usedIdWarning() {
+        async handleUsedIdWarning() {
             // DB연결하여 아이디 중복 체크
-            this.usedId = true;
+            try {    
+                const response = await axios.post("http://localhost:8080/account/checkUserId", {
+                    userid: this.userid
+                })
+                if(!response.ok) {
+                    throw new Error('Failed fetch post')
+                } else {
+                    console.log(response)
+                    this.usedIdWarning = 2;
+                }
+            } catch (err) {
+                console.log('Error :',err.message);
+                this.usedIdWarning = 1;
+            }
         },
         checkPasswordLength() {
             this.userpasswordWarning = this.userpassword.length < 6;
